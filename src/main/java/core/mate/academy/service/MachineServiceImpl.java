@@ -22,7 +22,6 @@ public class MachineServiceImpl implements MachineService<Machine> {
             MachineProducer producer = new TruckProducer();
             machines = producer.get();
         } else {
-            //throw new RuntimeException("Unsupported machine type: " + type.getName());
             machines = Collections.emptyList();
         }
         return new ArrayList<>(machines);
