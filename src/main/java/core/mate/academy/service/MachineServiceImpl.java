@@ -4,25 +4,29 @@ import core.mate.academy.model.Bulldozer;
 import core.mate.academy.model.Excavator;
 import core.mate.academy.model.Machine;
 import core.mate.academy.model.Truck;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MachineServiceImpl implements MachineService<Machine> {
     @Override
     public List<Machine> getAll(Class<? extends Machine> type) {
+        List<? extends Machine> machines;
         if (type == Bulldozer.class) {
             MachineProducer producer = new BulldozerProducer();
-            return producer.get();
+            machines = producer.get();
         } else if (type == Excavator.class) {
             MachineProducer producer = new ExcavatorProducer();
-            return producer.get();
+            machines = producer.get();
         } else if (type == Truck.class) {
             MachineProducer producer = new TruckProducer();
-            return producer.get();
+            machines = producer.get();
         } else {
             //throw new RuntimeException("Unsupported machine type: " + type.getName());
-            return Collections.emptyList();
+            machines = Collections.emptyList();
         }
+        return new ArrayList<>(machines);
     }
 
     @Override
